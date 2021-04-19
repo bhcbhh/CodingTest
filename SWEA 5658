@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+/*
+sort(v.begin(), v.end(), compare);              //사용자 정의 함수 사용
+sort(v.begin(), v.end(), greater<자료형>());   //내림차순 (Descending order)
+sort(v.begin(), v.end(), less<자료형>());       //오름차순 (default = Ascending order)
+*/
+#include <algorithm>
+#include <stdio.h>
+#include <vector>  // 벡터는 정렬을 좀 더 편하게 하려고 쓸거다.  
+
+/*
+ stoi -> string to int
+ stof -> string to float
+ stol -> string to long
+ stod -> string to double 
+ 
+ */  
+using namespace std;
+
+int N,K;
+string s;
+
+
+int main(){
+	
+	int T;
+	cin >> T;
+	int i,j,k,y,temp;
+	
+	
+	for(i = 0; i < T; i++){
+	    cin >> N >> K;  
+		vector <int> v;  
+	    cin >> s;
+	    
+	    
+	    
+    for (k = 0; k < ((N / 4)-1); k++) s += s.at(k);
+    // rotate 를 구현하는 부분  
+    
+	for (j = 0; j < N; j++) {
+			temp = (int)std::stol(s.substr(j, (N / 4)),nullptr,16); 
+			// 2번째 인자의 nullptr은 2번째 인자를 사용하지 않겠다는 뜻이다.  
+			// 아.. 여기서 16은 base라는 친구야.. 얘는 저 string 안에 있는애가 16진수다 라고 말하는 거야
+			// 즉, string 안에 있는 게 16진수인데 그걸 int 타입으로 바꿔주렴 이라는 뜻이다. 
+			//아.. 이거구나 내가 찾던게.. s.substr(시작지점 , 길이) 
+			v.push_back(temp);
+		}
+		
+	sort(v.begin(),v.end(),greater<int>()); // 제일 큰 놈 찾을거니까 
+    
+    int temp2 = 0;
+    int cnt = 0;
+     for(int u = 0; u < v.size(); u++){
+	   if(v[u] != temp2){
+	   	cnt++;
+        temp2 = v[u];	   
+	   } 
+	   
+       if(cnt == K){
+       	printf("#%d %d\n",i+1,v[u]);
+       	break;
+	   }
+     	
+	 }
+	} 
+}
+	
