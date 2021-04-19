@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+
+
+long long arr[1000000];
+
+int main(){
+	long n,a,b,c;
+    long chong_gamdok = 0;
+    long bu_gamdok = 0;
+	int i;
+	
+	scanf("%ld",&n);
+	
+	for(i = 0; i < n; i++){
+		scanf("%ld",&arr[i]);        
+	}
+	
+    scanf("%ld %ld",&b,&c);
+    
+    // 총 감독 계산하는 코드 
+    for(i =0 ; i<n; i++){
+    	if(arr[i] >= b){
+    	arr[i] -= b;
+    	chong_gamdok++;
+		}
+		else { // 이 부분이 히든 테스트에 걸리는 부분이다.  
+		arr[i] = 0;
+		chong_gamdok++;
+     }
+	}
+	
+
+    for(i = 0; i < n; i++){
+    	if(arr[i] % c != 0 ) bu_gamdok += arr[i]/c + 1; 
+    	else bu_gamdok += arr[i]/c;
+	
+	
+	}	
+	
+	printf("%ld", bu_gamdok + chong_gamdok);
+	
+	}
+	
+   	
+	
+	
+	
