@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int N,L;
+int arr[200][200];
+
+
+int main(){
+	cin >> N >> L;
+	
+	
+	// 일단 입력받고   
+	for(int x = 0 ; x <N; x++){
+		for(int y = 0; y < N; y++){
+			scanf("%d",&arr[x][y]);
+		}
+	} 
+	
+    for(int x = 0 ; x < N; x++){
+		for(int y = 0; y < N; y++){
+    	arr[x+N][y] = arr[y][x];
+		} 
+	}
+	
+	
+	// 내리막 : 1-L
+	// 평지 : +1
+	// 오르막 : 이전까지의 길이 확인 
+	
+	
+
+  	
+    int answer = 0;
+	int i,j;
+			
+	for(i = 0; i < 2*N; i++){
+		int count = 1;
+	for(j = 0; j < N-1; j++){ // 마지막 놈은 비교할 필요가 없으니까 이렇게 해버리는구나. 
+	
+	if(arr[i][j] == arr[i][j+1]) count++; 
+	else if( (arr[i][j]+1 == arr[i][j+1]) && count >= L) count = 1;  
+	else if( (arr[i][j] - 1 == arr[i][j+1]) && count >= 0) count = 1-L;
+    else break; 
+    } if(j == N-1 && count >= 0) answer++;
+  }	
+   
+  cout << answer;
+  return 0;
+  
+  
+}
