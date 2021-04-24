@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int n,m,h,result;
+int ladder[31][11];
+
+
+// n = 열 , h = 행  
+
+bool game(){  
+     
+   for(int i = 1; i <=n; i++){
+   	 int pos = i;
+    for(int j = 1; j <=h; j++){
+    	if(ladder[j][pos] == 1) pos++; 
+    	else if(ladder[j][pos-1] == 1) pos--;
+	}   	
+   	
+   	if(pos != i) return false;
+   
+   }
+   
+   return true;
+   
+ 	
+}
+
+void dfs(int count, int x, int y){
+	if(count >= result) return;
+	if(game()) {
+	  result = count;
+	  return; 
+    }
+    if(count == 3) return;
+    
+	for(int i = x; i <= h; i++){
+		for(int j = y; j <= n; j++){
+		  if(ladder[i][j] == 0 && ladder[i][j-1] == 0 && ladder[i][j+1] == 0){
+		  	ladder[i][j] = 1;
+			dfs(count+1,i,j);		  	
+		  	ladder[i][j] = 0;
+		  } 
+		} y = 1;
+	}	
+}
+
+
+
+int main(){
+	
+	cin >> n >> m >> h;
+	
+    for(int i = 0; i <m ; i++){
+    	int a,b;
+    	cin >> a >> b;
+    	ladder[a][b] = 1;
+	}
+	
+    result = 4;
+	dfs(0,1,1);
+	if(result == 4) result = -1;
+	cout << result;
+	
+	
+	
+}
