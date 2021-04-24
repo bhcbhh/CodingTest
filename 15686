@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct pos{
+	int px;
+	int py;
+};
+
+int n,m;
+int map[50][50];
+int answer; 
+
+vector <pos> house; // 집 좌표 
+vector <pos> chicken; // 치킨집 좌표 
+vector <pos> pick; // 우리가 고를 치킨 집  
+vector <int> answer2;
+
+void dfs(int position){
+	
+	if(pick.size() == m){
+		int sum = 0;
+		for(int v = 0; v < house.size(); v++){
+        for(int k = 0; k < pick.size(); k++){
+           int temp2 = abs(house[v].px - pick[k].px) + abs(house[v].py - pick[k].py);
+		   answer = min(answer,temp2);
+		} 
+	sum += answer;
+	answer = 99999;
+	 }
+	 answer2.push_back(sum);
+	 return;
+	}
+	
+	for(int i = position; i < chicken.size(); i++){
+		 pos temp;
+		 temp.px = chicken[i].px;
+		 temp.py = chicken[i].py;
+		 pick.push_back(temp);
+		 dfs(i+1);
+		 pick.pop_back();
+	}
+}
+
+
+int main(){
+ 
+   cin >> n >> m;
+   answer = 99999;
+   
+  for(int i = 0; i < n ; i++){
+  	for(int j =0; j < n; j++){
+  		scanf("%d",&map[i][j]);
+  		if(map[i][j] == 1) {
+  			pos temp;
+  			temp.px = i;
+  			temp.py = j;
+  			house.push_back(temp);  			
+		  }
+		else if(map[i][j] == 2) {
+  			pos temp;
+  			temp.px = i;
+  			temp.py = j;
+  			chicken.push_back(temp);  			
+		  }
+	  }
+  }
+  
+  dfs(0);
+
+  sort(answer2.begin(),answer2.end());
+  cout << answer2[0];
+ 
+}
