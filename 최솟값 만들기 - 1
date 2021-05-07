@@ -3,6 +3,8 @@
 #include <stdlib.h>
 
 
+//아니... C언어로 두고 풀었네 하...
+
 using namespaces std;
 // A_len은 배열 A의 길이입니다.
 // B_len은 배열 B의 길이입니다.
