@@ -1,0 +1,36 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int ax[20];
+
+int gdb(int a, int b){
+    
+    int temp = a*b;
+    
+    
+    while( b != 0){
+    int c = a % b;
+    a = b;
+    b = c;
+    }
+    
+    return temp / a;
+}
+
+
+int solution(vector<int> arr) {
+    
+     ax[1] = gdb(arr[0],arr[1]);
+     int index = 1;
+    
+    for(int i = 1; i < arr.size() - 1; i++){
+       ax[i+1] = gdb(ax[i],arr[i+1]);  
+       index++;   
+    }
+    
+    return ax[index];
+    
+    
+}
