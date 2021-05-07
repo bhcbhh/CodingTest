@@ -1,0 +1,41 @@
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
+
+
+int find(int x){
+    int index = 0;
+    
+    while(x != 1){
+     if(x % 2 == 1) index++;  
+     x = x/2;
+        
+     if(x == 3){
+         x = x/2;
+         index += 2;
+     }
+     else if(x == 2) index += 1;
+    }
+    
+    return index;    
+}
+
+
+int solution(int n) {
+    int temp = find(n); 
+    cout << temp;
+    int k = 1;
+    int answer;
+    
+    while(1){
+        if(find(n+k) == temp) {
+            answer = n+k;
+            break;
+        }
+        else k++;
+    }
+    
+    return answer;
+    
+}
