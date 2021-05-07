@@ -1,0 +1,28 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int n) {
+    
+    int start = 1;
+    int real_start = 1;
+    int answer = 0;
+    int loop = 0;
+    
+    while(loop < n){
+     int sum = 0;
+     start = real_start;
+     
+     while(sum < n){    
+      sum += start;
+      start++;
+      }
+    
+     if(sum == n) answer++;
+     real_start++;
+     loop++;
+    }
+    
+    return answer;
+}
