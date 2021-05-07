@@ -1,0 +1,47 @@
+#include <string>
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+bool solution(string s)
+{
+/*   int loop = s.size();
+   int open = 0;
+    
+   if(loop % 2 != 0) return false;
+    
+    for(int i = 0; i < loop; i++){
+      if(s[i] == '(') open++;
+      if(s[i] == ')') open--;
+   }
+    
+    if(s[0] == ')') return false;
+    if(s[loop-1] == '(') return false;
+    
+    if(open == 0 ) return true;
+    else return false;
+  */
+
+    
+    
+    
+    stack <char> st;
+    int loop = s.size();   
+    if(loop % 2 != 0) return false;
+    
+    for(int i = 0; i < loop; i++){
+      if(s[i] == '(') st.push(s[i]);
+      else{
+          if(!st.empty() && st.top() == '('){
+              st.pop();
+          }          
+          else st.push(s[i]);
+      }
+   }
+
+     if(!st.empty()) return false;
+     else return true;
+    
+
+}
