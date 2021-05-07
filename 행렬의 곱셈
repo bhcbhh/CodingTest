@@ -1,0 +1,38 @@
+#include <string>
+#include <vector>
+
+// vector는 동적배열이다
+
+//행(row) : Example. int row_count = arr.size() //result: 2
+
+//열(column) : Example. int col_count = arr[0].size() //result: 3
+
+
+// 일단, 그렇게 생각하자! 그.. 2차원 배열의 곱셈은 앞에 행렬의 행
+// 뒤에 행렬의 열로 최종 답안이 나온다. 그러면 이거는 무조건 for 문안에 들어가줘야겠지...
+
+using namespace std;
+
+vector<vector<int>> solution(vector<vector<int>> arr1, vector<vector<int>> arr2) {
+    vector<vector<int>> answer;
+    
+    int answer_column = arr2[0].size();
+    int answer_row = arr1.size();
+    
+    for(int i = 0; i < answer_row; i++){ // 그니까 행을 하나 만들 때마다 
+        vector <int> x;
+        
+        for(int j =0 ; j < answer_column; j++){ // 이제 안에 데이터 값을 만드는 거지 여기서
+            int sum = 0;
+            for(int k = 0; k < arr1[i].size(); k++){
+                sum += arr1[i][k] * arr2[k][j]; // 아 맞네 .. 곱셈을 하려면 중간 수가 같아야지...
+            }
+            x.push_back(sum);            
+        } // 우리가 마지막에 만들 행렬의 열의 개수 만큼 vector x가 채워질 때까지 돌리는 거지. 
+        
+        answer.push_back(x);
+    }
+    
+    return answer;
+    
+}
