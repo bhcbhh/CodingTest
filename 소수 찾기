@@ -1,0 +1,60 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <math.h>
+#include <algorithm>
+
+using namespace std;
+
+vector <int> v;
+int len;
+
+bool sosu(int a){
+    if ( a < 2) return false;
+    
+    for(int i = 2; i <= sqrt(a); i++){ //이렇게 루트값까지만 봐도 된다. 
+        if (a % i == 0) return false;
+    }
+    return true;
+}
+
+bool umm(string s,string x){
+    // s = numbers, x = comp
+    
+    int count = 0;
+
+    for(int i = 0; i < x.length(); i++){
+        for(int k = 0; k < s.length(); k++){
+            if(x[i] == s[k]){
+                count++;
+                s[k] = ' ';
+                break;
+            } 
+        } if(count == x.length()) return true;
+    }
+    return false;  
+}
+
+
+
+
+int solution(string numbers) {
+
+    int comp;
+    len = numbers.length();
+    int answer = 0;
+    
+    sort(numbers.begin(),numbers.end(),greater<int>()); //내림차순
+    comp = atoi(numbers.c_str());
+    
+    
+    for(int i = comp; i > 0; i--){
+        if(sosu(i) && umm(numbers,to_string(i))){
+           cout << i << endl;
+           answer++;
+        }
+    }
+    
+   return answer;
+    
+}
