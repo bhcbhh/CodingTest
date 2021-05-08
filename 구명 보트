@@ -1,0 +1,66 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+int solution(vector<int> people, int limit) {
+    //와... 문제를 제대로 읽자... 최대 탑승할 수 있는 인원은 2명이었네???
+  /*  int answer = 0;
+    sort(people.begin(),people.end());
+    int sum = 0;
+    int i;
+    int index = 0;
+    int loop = people.size();
+        
+        for(i = 0; i < loop; i++){
+           sum += people[i];
+           printf("sum : %d, limit : %d, i : %d\n",sum,limit,i);
+           if(sum > limit){
+               sum = 0;
+               i -= 1;
+               answer++;
+               cout << "sum > limit" << endl;
+           }
+          else if(sum == limit){
+              answer++;
+              sum = 0;
+              cout << "sum = limit" << endl;
+          }
+          else {
+              if(i == loop-1){
+                 answer++;
+                  break;
+                 cout << "오나" << endl;
+              }
+              continue;
+         }    
+        }
+    
+    return answer; */
+    
+    int answer = 0;
+    int end = people.size()-1;
+    int start = 0;
+    int sum = 0;
+    
+    sort(people.begin(),people.end());
+
+    
+    while(start < end){
+     sum = people[start] + people[end];
+     if(sum > limit){
+        end--;
+      }
+    else {
+        start++;
+        end--;
+      }
+        answer++;
+    }
+    
+    if(start == end) answer++;
+   return answer;
+    
+    
+}
