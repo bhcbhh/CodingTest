@@ -1,0 +1,40 @@
+#include <string>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int solution(int bridge_length, int weight, vector<int> truck_weights) {
+    int answer = 0;
+    queue <int> q; 
+    queue <int> remain_time; // 큐에 들어간 자동차들의 시간
+    int sum_weight = 0;
+    
+   while(1){
+       int size = remain_time.size();
+       for(int i = 0; i < size; i++){
+         int length = remain_time.front();
+         remain_time.pop();  //아.. 어차피 하나씩 다 빼고 다시 집어넣으니까 이렇게 한거구나 .... 와 미쳤다...
+       if(length <= 1){
+       sum_weight -= q.front();
+       q.pop();
+       continue;
+       }
+           
+       remain_time.push(length-1);    
+           
+       }
+       
+      if(sum_weight+truck_weights[0] <= weight && truck_weights.size() >= 1){
+           q.push(truck_weights[0]);
+           sum_weight += truck_weights[0];
+           remain_time.push(bridge_length);
+           truck_weights.erase(truck_weights.begin()); 
+       }
+       
+       answer++;
+       if(q.size() == 0 && truck_weights.size() == 0) break;
+   }
+    
+    return answer;
+}
