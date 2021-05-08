@@ -1,0 +1,23 @@
+#include <string>
+#include <vector>
+#include <unordered_map> //이렇게 해야 밑에처럼 접근할 수 있다.
+#include <iostream>
+
+using namespace std;
+int solution(vector<vector<string>> clothes) {
+    unordered_map <string, int> myclothes;
+    int answer = 1;
+    
+    
+    for(auto item : clothes){ //아 저렇게 2차원 벡터는 
+        //그냥 0이면 
+        myclothes[item[1]]++;
+    }
+    
+    for(auto tmp : myclothes) {//이거는 map이고 아마 map은 map.fisrt 접근하는듯
+        cout << tmp.first << " "; // 아마 스트링 타입 애들이 나오겠지
+        answer *= (tmp.second+1);
+    }
+    
+    return answer-1;
+}
