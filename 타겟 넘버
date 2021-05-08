@@ -1,0 +1,41 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+int answer;
+vector <int> num;
+int real_target;
+
+void dfs(int count,int sum){
+    
+    
+    
+    if(count == num.size()){
+       // cout << sum << endl;
+        if(sum == real_target){
+            answer++;
+        
+        }
+        return;
+    }
+    
+     dfs(count+1, sum + num[count]);
+
+     dfs(count+1, sum - num[count]);
+
+        
+}
+
+
+int solution(vector<int> numbers, int target) {
+    
+    real_target = target;
+    for(int i = 0; i < numbers.size(); i++){
+        num.push_back(numbers[i]);
+    }
+    
+    dfs(0,0);    
+    return answer;
+}
