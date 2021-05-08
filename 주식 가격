@@ -1,0 +1,38 @@
+#include <string>
+#include <vector>
+#include <stack>
+#include <iostream>
+
+
+using namespace std;
+
+vector<int> solution(vector<int> prices) {
+    int max = prices.size();
+    int loop = 0;
+    vector <int> v;
+    
+    while(loop < max){
+        int answer = 0; 
+        int start = prices[loop];
+      
+        for(int i = loop+1; i < max; i++){
+            if(start <= prices[i]){
+                answer++;
+            }
+            else {
+                answer++;
+                break;
+            }
+        }
+        
+        v.push_back(answer);
+        loop++;
+    }
+    
+    
+    return v;
+    
+    
+    
+    
+}
